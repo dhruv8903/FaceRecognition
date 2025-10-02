@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Youth Mood Detection AI</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <div class="container">
+        <header class="header">
+            <h1><i class="fas fa-brain"></i> Youth Mood Detection AI</h1>
+            <p>Analyze mood through text and facial expressions with privacy-first AI</p>
+        </header>
+
+        <div class="main-content">
+            <div class="analysis-tabs">
+                <button class="tab-btn active" data-tab="text">Text Analysis</button>
+                <button class="tab-btn" data-tab="facial">Facial Analysis</button>
+                <button class="tab-btn" data-tab="combined">Combined Analysis</button>
+            </div>
+
+            <!-- Text Analysis Tab -->
+            <div class="tab-content active" id="text-tab">
+                <div class="analysis-card">
+                    <h2><i class="fas fa-keyboard"></i> Text Sentiment Analysis</h2>
+                    <div class="input-group">
+                        <textarea id="textInput" placeholder="Share your thoughts, feelings, or experiences..."></textarea>
+                        <button id="analyzeTextBtn" class="analyze-btn">
+                            <i class="fas fa-search"></i> Analyze Text
+                        </button>
+                    </div>
+                    <div id="textResults" class="results hidden"></div>
+                </div>
+            </div>
+
+            <!-- Facial Analysis Tab -->
+            <div class="tab-content" id="facial-tab">
+                <div class="analysis-card">
+                    <h2><i class="fas fa-camera"></i> Facial Emotion Detection</h2>
+                    <div class="camera-section">
+                        <div class="camera-container">
+                            <video id="videoElement" autoplay muted></video>
+                            <canvas id="canvasElement" style="display: none;"></canvas>
+                            <div class="camera-overlay">
+                                <div class="face-detection-box" id="faceBox"></div>
+                            </div>
+                        </div>
+                        <div class="camera-controls">
+                            <button id="startCameraBtn" class="camera-btn">
+                                <i class="fas fa-video"></i> Start Camera
+                            </button>
+                            <button id="captureBtn" class="camera-btn" disabled>
+                                <i class="fas fa-camera"></i> Capture & Analyze
+                            </button>
+                            <button id="stopCameraBtn" class="camera-btn" disabled>
+                                <i class="fas fa-stop"></i> Stop Camera
+                            </button>
+                        </div>
+                    </div>
+                    <div id="facialResults" class="results hidden"></div>
+                </div>
+            </div>
+
+            <!-- Combined Analysis Tab -->
+            <div class="tab-content" id="combined-tab">
+                <div class="analysis-card">
+                    <h2><i class="fas fa-chart-line"></i> Combined Mood Analysis</h2>
+                    <div class="combined-input">
+                        <div class="input-group">
+                            <textarea id="combinedTextInput" placeholder="Share your thoughts..."></textarea>
+                        </div>
+                        <div class="camera-section">
+                            <div class="camera-container">
+                                <video id="combinedVideoElement" autoplay muted></video>
+                                <canvas id="combinedCanvasElement" style="display: none;"></canvas>
+                                <div class="camera-overlay">
+                                    <div class="face-detection-box" id="combinedFaceBox"></div>
+                                </div>
+                            </div>
+                            <div class="camera-controls">
+                                <button id="startCombinedCameraBtn" class="camera-btn">
+                                    <i class="fas fa-video"></i> Start Camera
+                                </button>
+                                <button id="captureCombinedBtn" class="camera-btn" disabled>
+                                    <i class="fas fa-camera"></i> Capture
+                                </button>
+                                <button id="stopCombinedCameraBtn" class="camera-btn" disabled>
+                                    <i class="fas fa-stop"></i> Stop Camera
+                                </button>
+                            </div>
+                        </div>
+                        <button id="analyzeCombinedBtn" class="analyze-btn combined-analyze">
+                            <i class="fas fa-brain"></i> Analyze Combined Mood
+                        </button>
+                    </div>
+                    <div id="combinedResults" class="results hidden"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Privacy Notice -->
+        <div class="privacy-notice">
+            <h3><i class="fas fa-shield-alt"></i> Privacy & Security</h3>
+            <ul>
+                <li><i class="fas fa-check"></i> Facial analysis runs locally on your device</li>
+                <li><i class="fas fa-check"></i> Text analysis uses Google Cloud (optional local fallback)</li>
+                <li><i class="fas fa-check"></i> No data is stored or transmitted without your consent</li>
+                <li><i class="fas fa-check"></i> Camera access is only used for real-time analysis</li>
+            </ul>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
